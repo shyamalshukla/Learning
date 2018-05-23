@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+    <style type="text/css">
+        circle {
+            fill-opacity: 0;
+            stroke-width: 3;
+            stroke: #FFFFFF;
+        }
+
+        .dots {
+            fill: #FFFFFF;
+            fill-opacity: 1;
+        }
+
+        line {
+            stroke: #FFFFFF;
+            stroke-width: 3;
+        }
+
+        path {
+            stroke: #FFFFFF;
+            stroke-width: 3;
+            fill-opacity: 0;
+        }
+    </style>
+    <script>
+                function Initialize() {
+      var width = $(document).width() * 0.95;
+      var height = $(document).height() * 0.95;
+
+      var mainSvg = $('#topLevel');
+      mainSvg.attr({
+                    viewBox: '0 0 ' + width + ' ' + height,
+	width: width,
+	height: height
+      });
+
+      $('#backgroundRect').attr({
+                    x: (width - height) / 2,
+	y: 0,
+	width: height,
+	height: height
+      });
+
+      var radiusMap = [
+	['c1', 14, function(parent, rOut, rIn) {
+                    ['c11', 'c12', 'c13', 'c14', 'c15', 'c16', 'c17', 'c18'].forEach(function (id, index) {
+                        var c = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+                        parent.append(c);
+                        c.setAttribute('id', id);
+                        c.setAttribute('cx', width / 2 + (0.75 * (height / 12)) * Math.sin(Math.PI * index / 4));
+                        c.setAttribute('cy', height / 2 + (0.75 * (height / 12)) * Math.cos(Math.PI * index / 4));
+                        c.setAttribute('r', (height / 12) / 10);
+                        c.setAttribute('class', 'dots');
+                    });
+
+                ['c19', 'c110', 'c111', 'c112', 'c113', 'c114', 'c115', 'c116'].forEach(function(id, index) {
+	      var c = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+	      parent.append(c);
+	      c.setAttribute('id', id);
+	      c.setAttribute('cx', width / 2 + (0.25 * (height / 12)) * Math.sin(Math.PI * index / 4));
+	      c.setAttribute('cy', height / 2 + (0.25 * (height / 12)) * Math.cos(Math.PI * index / 4));
+	      c.setAttribute('r', (height / 12) / 25);
+	      c.setAttribute('class', 'dots');
+      	    });
+	}],
+	['c2', 6.6, function(parent, rOut, rIn) {
+	    for(i = 0; i < 12; i++) {
+	    var l1 = document.createElementNS("http://www.w3.org/2000/svg", 'line');
+	    parent.append(l1);
+	    l1.setAttribute('id', 'l' + i + '1');
+	    l1.setAttribute('x1', width / 2 + rOut * Math.cos(Math.PI * i / 6));
+	    l1.setAttribute('y1', height / 2 + rOut * Math.sin(Math.PI * i / 6));
+	    l1.setAttribute('x2', width / 2 + rIn * Math.cos(Math.PI * i / 6 + Math.PI / 36));
+            l1.setAttribute('y2', height / 2 + rIn * Math.sin(Math.PI * i / 6 + Math.PI / 36));
+
+	    var l2 = document.createElementNS("http://www.w3.org/2000/svg", 'line');
+	    parent.append(l2);
+	    l2.setAttribute('id', 'l' + i + '2');
+	    l2.setAttribute('x1', width / 2 + rOut * Math.cos(Math.PI * i / 6));
+	    l2.setAttribute('y1', height / 2 + rOut * Math.sin(Math.PI * i / 6));
+	    l2.setAttribute('x2', width / 2 + rIn * Math.cos(Math.PI * i / 6 - Math.PI / 36));
+            l2.setAttribute('y2', height / 2 + rIn * Math.sin(Math.PI * i / 6 - Math.PI / 36));
+
+	    var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+	    parent.append(circle);
+	    circle.setAttribute('cx', width / 2 + (Math.cos(Math.PI * i / 6 + Math.PI / 12)) * (rOut + rIn) / 2);
+	    circle.setAttribute('cy', height / 2 + (Math.sin(Math.PI * i / 6 + Math.PI / 12)) * (rOut + rIn) / 2);
+	    circle.setAttribute('r', (rOut - rIn) / 6);
+
+	    var dot = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+	    parent.append(dot);
+	    dot.setAttribute('class', 'dots');
+	    dot.setAttribute('cx', width / 2 + (Math.cos(Math.PI * i / 6 + Math.PI / 12)) * (rOut + rIn) / 2);
+	    dot.setAttribute('cy', height / 2 + (Math.sin(Math.PI * i / 6 + Math.PI / 12)) * (rOut + rIn) / 2);
+	    dot.setAttribute('r', (rOut - rIn) / 12);
+	  }}],
+	['c3', 4.75, function(parent, rOut, rIn) {
+	    	for(i = 0; i < 24; i++) {
+		  var dotBig = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+		  parent.append(dotBig);
+		  dotBig.setAttribute('cx', width / 2 + ((3 * rOut + rIn) / 4) * Math.cos(Math.PI * i / 12));
+		  dotBig.setAttribute('cy', height / 2 + ((3 * rOut + rIn) / 4) * Math.sin(Math.PI * i / 12));
+		  dotBig.setAttribute('class', 'dots');
+		  dotBig.setAttribute('r', (rOut - rIn) / 12);
+
+		  var dotSmall = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+		  parent.append(dotSmall);
+		  dotSmall.setAttribute('cx', width / 2 + ((rOut + rIn) / 2) * Math.cos(Math.PI * i / 12 + Math.PI / 24));
+		  dotSmall.setAttribute('cy', height / 2 + ((rOut + rIn) / 2) * Math.sin(Math.PI * i / 12 + Math.PI / 24));
+		  dotSmall.setAttribute('class', 'dots');
+		  dotSmall.setAttribute('r', (rOut - rIn) / 24);
+
+		  var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+		  parent.append(path);
+		  var startX = width / 2 + rIn * Math.cos(Math.PI * (i - 3/4)/ 12);
+		  var startY = height / 2 + rIn * Math.sin(Math.PI * (i - 3/4) / 12);
+		  var controlX1 = width / 2 + ((3 * rOut + rIn) / 4) * Math.cos(Math.PI * i / 12 - Math.PI / 24);
+		  var controlY1 = height / 2 + ((3 * rOut + rIn) / 4) * Math.sin(Math.PI * i / 12 - Math.PI / 24);
+		  var controlX2 = width / 2 + ((3 * rOut + rIn) / 4) * Math.cos(Math.PI * i / 12 + Math.PI / 24);
+		  var controlY2 = height / 2 + ((3 * rOut + rIn) / 4) * Math.sin(Math.PI * i / 12 + Math.PI / 24);
+		  var endX = width / 2 + rIn * Math.cos(Math.PI * (i + 3/4)/ 12);
+		  var endY = height / 2 + rIn * Math.sin(Math.PI * (i + 3/4) / 12);
+		  path.setAttribute('d', 'M ' + startX + ' ' + startY + ' C ' + controlX1 + ' ' + controlY1 + ', ' + controlX2 + ' ' + controlY2 + ', ' + endX + ' ' + endY);
+		}
+	      }],
+	['c4', 2.5, function(parent, rOut, rIn) {
+		  for(var i = 0; i < 24; i++) {
+
+		    var lineX = width / 2 + ((3 * rIn / 9 + 6 * rOut / 9)) * Math.cos(Math.PI * 4 * i / 48);
+		    var lineY = height / 2 + ((3 * rIn / 9 + 6 * rOut / 9)) * Math.sin(Math.PI * 4 * i / 48);
+
+		    var dotTwig1 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+		    parent.append(dotTwig1);
+		    var dotTwig1X = width / 2 + ((1 * rIn / 9 + 8 * rOut / 9)) * Math.cos(Math.PI * 4 * i / 48);
+		    var dotTwig1Y = height / 2 + ((1 * rIn / 9 + 8 * rOut / 9)) * Math.sin(Math.PI * 4 * i / 48);
+		    dotTwig1.setAttribute('cx', dotTwig1X);
+		    dotTwig1.setAttribute('cy', dotTwig1Y);
+		    dotTwig1.setAttribute('r', (rOut - rIn) / 36);
+		    dotTwig1.setAttribute('class', 'dots');
+
+		    var dotLine1 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+		    parent.append(dotLine1);
+		    dotLine1.setAttribute('x1', lineX);
+		    dotLine1.setAttribute('y1', lineY);
+		    dotLine1.setAttribute('x2', dotTwig1X);
+		    dotLine1.setAttribute('y2', dotTwig1Y);
+
+		    var dotTwig2 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+		    parent.append(dotTwig2);
+		    dotTwig2.setAttribute('cx', width / 2 + ((1 * rIn / 9 + 8 * rOut / 9)) * Math.cos(Math.PI * (4 * i + 2) / 48));
+		    dotTwig2.setAttribute('cy', height / 2 + ((1 * rIn / 9 + 8 * rOut / 9)) * Math.sin(Math.PI * (4 * i + 2) / 48));
+		    dotTwig2.setAttribute('r', (rOut - rIn) / 36);
+		    dotTwig2.setAttribute('class', 'dots');
+
+		    var dotTwig3 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+		    parent.append(dotTwig3);
+		    var dotTwig3X = width / 2 + ((2 * rIn / 9 + 7 * rOut / 9)) * Math.cos(Math.PI * (4 * i + 1) / 48);
+		    var dotTwig3Y = height / 2 + ((2 * rIn / 9 + 7 * rOut / 9)) * Math.sin(Math.PI * (4 * i + 1) / 48);
+		    dotTwig3.setAttribute('cx', dotTwig3X);
+		    dotTwig3.setAttribute('cy', dotTwig3Y);
+		    dotTwig3.setAttribute('r', (rOut - rIn) / 36);
+		    dotTwig3.setAttribute('class', 'dots');
+
+		    var dotLine2 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+		    parent.append(dotLine2);
+		    dotLine2.setAttribute('x1', lineX);
+		    dotLine2.setAttribute('y1', lineY);
+		    dotLine2.setAttribute('x2', dotTwig3X);
+		    dotLine2.setAttribute('y2', dotTwig3Y);
+
+		    var dotTwig4 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+		    parent.append(dotTwig4);
+		    var dotTwig4X = width / 2 + ((2 * rIn / 9 + 7 * rOut / 9)) * Math.cos(Math.PI * (4 * i - 1) / 48);
+		    var dotTwig4Y = height / 2 + ((2 * rIn / 9 + 7 * rOut / 9)) * Math.sin(Math.PI * (4 * i - 1) / 48);
+		    dotTwig4.setAttribute('cx', dotTwig4X);
+		    dotTwig4.setAttribute('cy', dotTwig4Y);
+		    dotTwig4.setAttribute('r', (rOut - rIn) / 36);
+		    dotTwig4.setAttribute('class', 'dots');
+
+		    var dotLine3 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+		    parent.append(dotLine3);
+		    dotLine3.setAttribute('x1', lineX);
+		    dotLine3.setAttribute('y1', lineY);
+		    dotLine3.setAttribute('x2', dotTwig4X);
+		    dotLine3.setAttribute('y2', dotTwig4Y);
+
+		    var arcEndX = width / 2 + ((3 * rIn / 9 + 6 * rOut / 9)) * Math.cos(Math.PI * (4 * i + 4) / 48);
+		    var arcEndY = height / 2 + ((3 * rIn / 9 + 6 * rOut / 9)) * Math.sin(Math.PI * (4 * i + 4)  / 48);
+
+		    var arc = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+		    parent.append(arc);
+		    arc.setAttribute('d', 'M ' + lineX + ' ' + lineY
+					+ ' C ' + dotTwig3X + ' ' + dotTwig3Y + ', '
+					+ (width / 2 + (2 * rIn / 9 + 7 * rOut / 9) * Math.cos(Math.PI * (4 * i + 3) / 48)) + ' ' + (height / 2 + (2 * rIn / 9 + 7 * rOut / 9) * Math.sin(Math.PI * (4 * i + 3) / 48)) + ', '
+					+ arcEndX + ' ' + arcEndY);
+
+		    var dotupper = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+		    parent.append(dotupper);
+		    dotupper.setAttribute('cx', width / 2 + (( 7 * rIn / 9 + 2 * rOut / 9)) * Math.cos(Math.PI * (2 * i + 3) / 24));
+		    dotupper.setAttribute('cy', height / 2 + ((7 * rIn / 9 + 2 * rOut / 9)) * Math.sin(Math.PI * (2 * i + 3) / 24));
+		    dotupper.setAttribute('r', (rOut - rIn) / 48);
+		    dotupper.setAttribute('class', 'dots');
+
+		    var dotLower = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+		    parent.append(dotLower);
+		    dotLower.setAttribute('cx', width / 2 + (( 8 * rIn / 9 + 1 * rOut / 9)) * Math.cos(Math.PI * i / 12));
+		    dotLower.setAttribute('cy', height / 2 + ((8 * rIn / 9 + 1 * rOut / 9)) * Math.sin(Math.PI * i / 12));
+		    dotLower.setAttribute('r', (rOut - rIn) / 48);
+		    dotLower.setAttribute('class', 'dots');
+
+		    var arc1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+		    parent.append(arc1);
+		    arc1.setAttribute('fill-opacity', 0);
+		    var startX = width / 2 + (2 * rIn / 3 + rOut / 3) * Math.cos(Math.PI * (2 * i - 1) / 24);
+		    var startY = height / 2 + (2 * rIn / 3 + rOut / 3) * Math.sin(Math.PI * (2 * i - 1) / 24);
+		    var c1X = width / 2 + (5 * rIn / 9 + 4 * rOut / 9) * Math.cos(Math.PI * (4 * i - 1) / 48);
+		    var c1Y = height / 2 + (5 * rIn / 9 + 4 * rOut / 9) * Math.sin(Math.PI * (4 * i - 1) / 48);
+		    var c2X = width / 2 + (5 * rIn / 9 + 4 * rOut / 9) * Math.cos(Math.PI * (4 * i + 1) / 48);
+		    var c2Y = height / 2 + (5 * rIn / 9 + 4 * rOut / 9) * Math.sin(Math.PI * (4 * i + 1) / 48);
+		    var endX = width / 2 + (2 * rIn / 3 + rOut / 3) * Math.cos(Math.PI * (2 * i + 1) / 24);
+		    var endY = height / 2 + (2 * rIn / 3 + rOut / 3) * Math.sin(Math.PI * (2 * i + 1) / 24);
+		    arc1.setAttribute('d', 'M ' + startX + ' ' + startY + ' C ' + c1X + ' ' + c1Y + ', ' + c2X + ' ' + c2Y + ', ' + endX + ' ' + endY);
+
+		    var arc2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+		    parent.append(arc2);
+		    arc2.setAttribute('stroke', '#FFFFBB');
+		    //arc2.setAttribute('stroke-width', 4);
+		    arc2.setAttribute('fill-opacity', 0);
+		    var startX_2 = width / 2 + (5 * rIn / 9 + 4 * rOut / 9) * Math.cos(Math.PI * i / 12);
+		    var startY_2 = height / 2 + (5 * rIn / 9 + 4 * rOut / 9) * Math.sin(Math.PI * i / 12);
+		    var c1X_2 = width / 2 + (3 * rIn / 9 + 6 * rOut / 9) * Math.cos(Math.PI * (4 * i + 1) / 48);
+		    var c1Y_2 = height / 2 + (3 * rIn / 9 + 6 * rOut / 9) * Math.sin(Math.PI * (4 * i + 1) / 48);
+		    var c2X_2 = width / 2 + (3 * rIn / 9 + 6 * rOut / 9) * Math.cos(Math.PI * (4 * i + 2) / 48);
+		    var c2Y_2 = height / 2 + (3 * rIn / 9 + 6 * rOut / 9) * Math.sin(Math.PI * (4 * i + 2) / 48);
+		    var endX_2 = width / 2 + (5 * rIn / 9 + 4 * rOut / 9) * Math.cos(Math.PI * (4 * i + 3) / 48);
+		    var endY_2 = height / 2 + (5 * rIn / 9 + 4 * rOut / 9) * Math.sin(Math.PI * (4 * i + 3) / 48);
+		    arc2.setAttribute('d', 'M ' + startX_2 + ' ' + startY_2 + ' C ' + c1X_2 + ' ' + c1Y_2 + ', ' + c2X_2 + ' ' + c2Y_2 + ', ' + endX_2 + ' ' + endY_2);
+		  }
+		}],
+	['c5', 2.25, function(parent, rOut, rIn) {
+		  for(var i = 0; i < 48; i ++) {
+		    var dot1 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+		    parent.append(dot1);
+		    dot1.setAttribute('class', 'dots');
+		    dot1.setAttribute('cx', width / 2 + Math.cos(Math.PI * i / 24) * (3 * rOut + rIn) / 4);
+		    dot1.setAttribute('cy', height / 2 + Math.sin(Math.PI * i / 24) * (3 * rOut + rIn) / 4);
+		    dot1.setAttribute('r', (rOut - rIn) / 24);
+
+		    var dot2 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+		    parent.append(dot2);
+		    dot2.setAttribute('class', 'dots');
+		    dot2.setAttribute('cx', width / 2 + Math.cos(Math.PI * i / 24 + Math.PI / 48) * (rOut + 3 * rIn) / 4);
+		    dot2.setAttribute('cy', height / 2 + Math.sin(Math.PI * i / 24 + Math.PI / 48) * (rOut + 3 * rIn) / 4);
+		    dot2.setAttribute('r', (rOut - rIn) / 24);
+
+		    var line1 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+		    parent.append(line1);
+		    line1.setAttribute('x1', width / 2 + rIn * Math.cos(Math.PI * i / 24));
+		    line1.setAttribute('y1', height / 2 + rIn * Math.sin(Math.PI * i / 24));
+		    line1.setAttribute('x2', width / 2 + Math.cos(Math.PI * i / 24 - Math.PI / 48) * rOut);
+		    line1.setAttribute('y2', height / 2 + Math.sin(Math.PI * i / 24 - Math.PI / 48) * rOut);
+
+		    var line2 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+		    parent.append(line2);
+		    line2.setAttribute('x1', width / 2 + rIn * Math.cos(Math.PI * i / 24));
+		    line2.setAttribute('y1', height / 2 + rIn * Math.sin(Math.PI * i / 24));
+		    line2.setAttribute('x2', width / 2 + Math.cos(Math.PI * i / 24 + Math.PI / 48) * rOut);
+		    line2.setAttribute('y2', height / 2 + Math.sin(Math.PI * i / 24 + Math.PI / 48) * rOut);
+		  }
+		}]
+	];
+
+      var topGroup = $('#main');
+
+      radiusMap.forEach(function (item, index) {
+          var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+	  var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+	  topGroup.append(g);
+	  g.setAttribute('id', 'g' + index);
+	  var group = $('#g' + index);
+	  group.append(c);
+	  c.setAttribute('id', item[0]);
+	  c.setAttribute('cx', width / 2);
+	  c.setAttribute('cy', height / 2);
+	  c.setAttribute('r', height / item[1]);
+
+	  item[2](group, height / item[1], index != 0 ? height / radiusMap[index - 1][1] : 0);
+      });
+
+	  var rotationTime = 150;
+          TweenMax.to("#g0", rotationTime, {rotation: -360, transformOrigin: "50% 50%", repeat: -1, ease: Linear.easeNone });
+          TweenMax.to("#g1", rotationTime, {rotation: 360, transformOrigin: "50% 50%", repeat: -1, ease: Linear.easeNone });
+          TweenMax.to("#g2", rotationTime, {rotation: -360, transformOrigin: "50% 50%", repeat: -1, ease: Linear.easeNone });
+          TweenMax.to("#g3", rotationTime, {rotation: 360, transformOrigin: "50% 50%", repeat: -1, ease: Linear.easeNone });
+          TweenMax.to("#g4", rotationTime, {rotation: -360, transformOrigin: "50% 50%", repeat: -1, ease: Linear.easeNone });
+          //TweenMax.to("#g5", rotationTime, {rotation: 360, transformOrigin: "50% 50%", repeat: -1, ease: Linear.easeNone });
+    }
+    </script>
+</head>
+<body style="background-color:black">
+    <script>
+                $(document).ready(Initialize);
+    </script>
+
+    <svg id="topLevel">
+        <defs>
+            <radialGradient id="full-background">
+                <stop offset="0%" stop-color="#FF00AA" />
+                <stop offset="75" stop-color="#220011" />
+                <stop offset="100%" stop-color="#000000" />
+            </radialGradient>
+        </defs>
+        <rect id="backgroundRect" fill="url(#full-background)" />
+        <g id="main"></g>
+    </svg>
+</body>
+</html>

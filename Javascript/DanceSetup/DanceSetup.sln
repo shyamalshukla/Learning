@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Backgrounds", "Backgrounds\", "{8238245F-C8E2-4484-87A0-34D8D8FA3FC0}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.6.1"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_62836"
+		Debug.AspNetCompiler.PhysicalPath = "Backgrounds\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_62836\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_62836"
+		Release.AspNetCompiler.PhysicalPath = "Backgrounds\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_62836\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "62836"
+		SlnRelativePath = "Backgrounds\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8238245F-C8E2-4484-87A0-34D8D8FA3FC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8238245F-C8E2-4484-87A0-34D8D8FA3FC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B966A403-77BC-4890-9BF6-2B1B4CE71C0A}
+	EndGlobalSection
+EndGlobal

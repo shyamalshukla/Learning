@@ -1,0 +1,36 @@
+﻿<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+    <script>
+        function init() {
+            var current = 0;
+            var next = ++current % 10;
+            var delay = 0;
+
+            for (var i = 1; i < 10; i++) {
+                TweenMax.to("#" + current, 20, { opacity: 0, delay: delay, ease: Power4.easeInOut });
+                TweenMax.to("#" + next, 20, { opacity: 1, delay: delay + 1, ease: Power4.easeInOut });
+
+                current = ++current % 10;
+                next = ++next % 10;
+                delay += 20;
+            }
+        }
+    </script>
+</head>
+<body style="background-color:black">
+    <script>
+        $(document).ready(init);
+    </script>
+    <img id="0" src="Images\background_1.jpg" style="z-Index:1;width:1500px;height:800px;position:absolute;opacity:1" />
+    <img id="1" src="Images\background_2.jpg" style="z-Index:1;width:1500px;height:800px;position:absolute;opacity:0" />
+    <img id="2" src="Images\background_3.jpg" style="z-Index:1;width:1500px;height:800px;position:absolute;opacity:0" />
+    <img id="3" src="Images\background_4.jpg" style="z-Index:1;width:1500px;height:800px;position:absolute;opacity:0" />
+    <img id="4" src="Images\background_5.jpg" style="z-Index:1;width:1500px;height:800px;position:absolute;opacity:0" />
+    <img id="5" src="Images\background_6.jpg" style="z-Index:1;width:1500px;height:800px;position:absolute;opacity:0" />
+    <img id="6" src="Images\background_15.jpg" style="z-Index:1;width:1500px;height:800px;position:absolute;opacity:0" />
+</body>
+</html>
