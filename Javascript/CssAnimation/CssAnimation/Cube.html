@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        div {
+            text-align: center;
+            height: 100px;
+            width: 100px;
+            position: absolute;
+            perspective: 8005px;
+        }
+
+        .side {
+            background-color:rgba(255,0,0,0.5);
+            border-width: 1px;
+            border-style: solid;
+            border-color: black;
+        }
+        
+        #front {
+            transform: translateZ(50px);
+        }       
+
+        #back {
+            transform: rotateY(180deg) translateZ(50px);
+        }
+
+        #left {
+            transform: rotateY(-90deg) translateZ(50px);
+        } 
+
+        #right {
+            transform: rotateY(90deg) translateZ(50px);
+        } 
+
+        #top {
+            transform: rotateX(90deg) translateZ(50px);
+        } 
+
+        #bottom {
+            transform: rotateX(-90deg) translateZ(50px);
+        } 
+
+        #main {
+            transform-style: preserve-3d;
+            animation-name: anim;
+            animation-duration: 5s;
+            animation-iteration-count: infinite; 
+        }
+
+        @keyframes anim {
+            from { transform: translate3d(100px, 100px, 100px) rotateX(0deg) rotateY(0deg);}
+            to { transform: translate3d(100px, 100px, 100px) rotateX(360deg) rotateY(360deg);}
+            }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div id="front" class="side">A</div>
+        <div id="back" class="side">B</div>
+        <div id="left" class="side">C</div>
+        <div id="right" class="side">D</div>
+        <div id="top" class="side">E</div>
+        <div id="bottom" class="side">F</div>
+    </div>
+</body>
+</html>
