@@ -7,15 +7,15 @@
     <script>
         function init() {
             var current = 0;
-            var next = ++current % 10;
+            var next = ++current % 15;
             var delay = 0;
 
-            for (var i = 1; i < 10; i++) {
+            for (var i = 1; i < 15; i++) {
                 TweenMax.to("#" + current, 20, { opacity: 0, delay: delay, ease: Power4.easeInOut });
                 TweenMax.to("#" + next, 20, { opacity: 1, delay: delay + 1, ease: Power4.easeInOut });
 
-                current = ++current % 10;
-                next = ++next % 10;
+                current = ++current % 15;
+                next = ++next % 15;
                 delay += 20;
             }
         }
@@ -31,6 +31,11 @@
     <img id="3" src="Images\background_4.jpg" style="z-Index:1;width:1500px;height:800px;position:absolute;opacity:0" />
     <img id="4" src="Images\background_5.jpg" style="z-Index:1;width:1500px;height:800px;position:absolute;opacity:0" />
     <img id="5" src="Images\background_6.jpg" style="z-Index:1;width:1500px;height:800px;position:absolute;opacity:0" />
-    <img id="6" src="Images\background_15.jpg" style="z-Index:1;width:1500px;height:800px;position:absolute;opacity:0" />
+    <img id="6" src="Images\background_7.jpg" style="z-Index:1;width:1500px;height:800px;position:absolute;opacity:0" />
+    <img id="7" src="Images\background_8.jpg" style="z-Index:1;width:1500px;height:800px;position:absolute;opacity:0" />
+    <img id="8" src="Images\background_9.jpg" style="z-Index:1;width:1500px;height:800px;position:absolute;opacity:0" />
+    <img id="9" src="Images\background_10.jpg" style="z-Index:1;width:1500px;height:800px;position:absolute;opacity:0" />
+    <img id="10" src="Images\background_11.jpg" style="z-Index:1;width:1500px;height:800px;position:absolute;opacity:0" />
+    <img id="11" src="Images\background_15.jpg" style="z-Index:1;width:1500px;height:800px;position:absolute;opacity:0" />
 </body>
 </html>
