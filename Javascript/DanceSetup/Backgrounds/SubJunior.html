@@ -7,8 +7,8 @@
     <script>
         function init() {
 	    var img = $("img");
-            img.attr({width: $(document).width() * 0.95,
-	    height: $(document).height() * 0.95});
+            img.attr({width: $(window).width(),
+	    height: $(window).height()});
 
             var current = 0;
             var next = ++current % 15;
