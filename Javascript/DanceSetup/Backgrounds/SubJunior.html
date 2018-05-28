@@ -11,7 +11,7 @@
 	    var height = $(window).height();
 	    if (height > width * 2 / 3)
 	    {
-                img.attr({ width: $(window).width(),  height: $(window).height() });
+                img.attr({ width: width,  height: width * 2 / 3 });
 		img.css("margin-top", (height - (width * 2 / 3)) / 2 + 'px');
 	    }
 	    else
