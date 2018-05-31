@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+    <script>
+        function init() {
+            var width = $(window).width();
+            var height = $(window).height();
+
+            var svg = $('svg');
+            svg.attr({
+                width: width,
+                height: height,
+                fill: '#000000',
+                viewBox: '0 0 ' + width + ' ' + height
+            });
+            for (var j = 0; j < 4; j++) {
+                var startX = j % 2 * width / 2;
+                var startY = j < 2 ? 0 : height / 2;
+                for (var i = 0; i < 35; i++) {
+                    var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    c.setAttribute('id', 'c' + j + i);
+                    c.setAttribute('cx', Math.random() * width / 2 + startX);
+                    c.setAttribute('cy', Math.random() * height / 2 + startY);
+                    c.setAttribute('r', width / 30);
+                    //c.setAttribute('stroke', '#FFFFFF');
+                    var opacity = Math.random();
+                    if (opacity < 0.25) {
+                        opacity += 0.25;
+                    }
+                    if (opacity > 0.75) {
+                        opacity -= 0.2;
+                    }
+                    c.setAttribute('fill-opacity', opacity);
+                    c.setAttribute('fill', '#FFFF00');
+                    c.setAttribute('filter', 'url(#blur' + Math.floor(Math.random() * 5) + ')');
+                    svg.append(c);
+                    TweenMax.to("#c" + j + i, 30, { fill: '#00FFFF' });
+                    TweenMax.to("#c" + j + i, 30, { fill: '#FFFFFF', delay: 30 });
+                    TweenMax.to("#c" + j + i, 30, { fill: '#FFFF00', delay: 60 });
+                    TweenMax.to("#c" + j + i, 30, { fill: '#FF00FF', delay: 90 });
+
+                    TweenMax.to("#c" + j + i, 30, { fill: '#00FFFF', delay: 120 });
+                    TweenMax.to("#c" + j + i, 30, { fill: '#FFFFFF', delay: 150 });
+                    TweenMax.to("#c" + j + i, 30, { fill: '#FFFF00', delay: 180 });
+                    TweenMax.to("#c" + j + i, 30, { fill: '#FF00FF', delay: 210 });
+
+                    TweenMax.to("#c" + j + i, 30, { fill: '#00FFFF', delay: 240 });
+                    TweenMax.to("#c" + j + i, 30, { fill: '#FFFFFF', delay: 270 });
+                    TweenMax.to("#c" + j + i, 30, { fill: '#FFFF00', delay: 300 });
+                    TweenMax.to("#c" + j + i, 30, { fill: '#FF00FF', delay: 330 });
+                }
+            }
+        }
+    </script>
+</head>
+<body style="background:black;overflow:hidden">
+    <script>
+        $(document).ready(init);
+    </script>
+    <svg>
+        <filter id="blur1">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0" />
+        </filter>
+        <filter id="blur2">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+        </filter>
+        <filter id="blur3">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="4" />
+        </filter>
+        <filter id="blur4">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="6" />
+        </filter>
+        <filter id="blur5">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="8" />
+        </filter>
+    </svg>
+</body>
+</html>
