@@ -7,8 +7,18 @@
     <script>
         function init() {
 	    var img = $("img");
-            img.attr({width: $(document).width() * 0.95,
-	    height: $(document).height() * 0.95});
+	    var width = $(window).width();
+	    var height = $(window).height();
+	    if (height > width * 2 / 3)
+	    {
+                img.attr({ width: width,  height: width * 2 / 3 });
+		img.css("margin-top", (height - (width * 2 / 3)) / 2 + 'px');
+	    }
+	    else
+	    {
+                img.attr({ width: height * 3 / 2, height : height, 'margin-left': (width - height * 3 / 2) / 2 });
+		img.css("margin-left", (width - (height * 3 / 2)) / 2 + 'px');
+	    }
 
             var current = 0;
             var next = ++current % 15;
@@ -30,17 +40,20 @@
         $(document).ready(init);
         $(window).on('resize', function() { location.reload(false); });
     </script>
-    <img id="0" src="Images\background_1.jpg" style="z-Index:1;position:absolute;opacity:1" />
-    <img id="1" src="Images\background_2.jpg" style="z-Index:1;position:absolute;opacity:0" />
-    <img id="2" src="Images\background_3.jpg" style="z-Index:1;position:absolute;opacity:0" />
-    <img id="3" src="Images\background_4.jpg" style="z-Index:1;position:absolute;opacity:0" />
-    <img id="4" src="Images\background_5.jpg" style="z-Index:1;position:absolute;opacity:0" />
-    <img id="5" src="Images\background_6.jpg" style="z-Index:1;position:absolute;opacity:0" />
-    <img id="6" src="Images\background_7.jpg" style="z-Index:1;position:absolute;opacity:0" />
-    <img id="7" src="Images\background_8.jpg" style="z-Index:1;position:absolute;opacity:0" />
-    <img id="8" src="Images\background_9.jpg" style="z-Index:1;position:absolute;opacity:0" />
-    <img id="9" src="Images\background_10.jpg" style="z-Index:1;position:absolute;opacity:0" />
-    <img id="10" src="Images\background_11.jpg" style="z-Index:1;position:absolute;opacity:0" />
-    <img id="11" src="Images\background_15.jpg" style="z-Index:1;position:absolute;opacity:0" />
+    <div>
+        <img id="0" src="Images\background_1.jpg" style="z-Index:1;position:absolute;opacity:1" />
+        <img id="1" src="Images\background_2.jpg" style="z-Index:1;position:absolute;opacity:0" />
+        <img id="2" src="Images\background_3.jpg" style="z-Index:1;position:absolute;opacity:0" />
+        <img id="3" src="Images\background_4.jpg" style="z-Index:1;position:absolute;opacity:0" />
+        <img id="4" src="Images\background_5.jpg" style="z-Index:1;position:absolute;opacity:0" />
+        <img id="5" src="Images\background_6.jpg" style="z-Index:1;position:absolute;opacity:0" />
+        <img id="6" src="Images\background_7.jpg" style="z-Index:1;position:absolute;opacity:0" />
+        <img id="7" src="Images\background_8.jpg" style="z-Index:1;position:absolute;opacity:0" />
+        <img id="8" src="Images\background_9.jpg" style="z-Index:1;position:absolute;opacity:0" />
+        <img id="9" src="Images\background_10.jpg" style="z-Index:1;position:absolute;opacity:0" />
+        <img id="10" src="Images\background_11.jpg" style="z-Index:1;position:absolute;opacity:0" />
+        <img id="11" src="Images\background_12.jpg" style="z-Index:1;position:absolute;opacity:0" />
+        <img id="12" src="Images\background_13.jpg" style="z-Index:1;position:absolute;opacity:0" />
+    </div>
 </body>
 </html>
